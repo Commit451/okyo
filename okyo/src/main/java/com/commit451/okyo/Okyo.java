@@ -16,14 +16,14 @@ import okio.Okio;
 public class Okyo {
 
     @NonNull
-    public byte[] readByteArrayFromFile(@NonNull File file) throws IOException {
+    public static byte[] readByteArrayFromFile(@NonNull File file) throws IOException {
         BufferedSource fileSource = Okio.buffer(Okio.source(file));
         byte[] bytes = fileSource.readByteArray();
         fileSource.close();
         return bytes;
     }
 
-    public void writeInputStreamToFile(@NonNull File file, @NonNull InputStream inputStream) throws IOException {
+    public static void writeInputStreamToFile(@NonNull File file, @NonNull InputStream inputStream) throws IOException {
         BufferedSink sink = Okio.buffer(Okio.sink(file));
         BufferedSource source = Okio.buffer(Okio.source(inputStream));
         sink.writeAll(source);
