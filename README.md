@@ -6,8 +6,15 @@
 
 # Usefulness
 ```java
-byte[] bytes = Okyo.readByteArrayFromFile(file);
-Okyo.writeInputStreamToFile(File file, InputStream inputStream);
+//read
+byte[] bytes = Okyo.readFileAsByteArray(file);
+String content = Okyo.readFileAsString(file);
+//write
+Okyo.writeInputStreamToFile(file, inputStream);
+Okyo.writeByteArrayToFile(file, bytes);
+Okyo.writeByteArrayToFile(file, bytes);
+Okyo.writeStringToFile(file, string);
+Okyo.writeFileToFile(file, otherFile);
 ```
 
 License
