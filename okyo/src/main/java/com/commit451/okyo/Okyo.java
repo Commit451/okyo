@@ -48,6 +48,14 @@ public class Okyo {
     }
 
     @NonNull
+    public static String readInputStreamAsString(@NonNull InputStream inputStream) throws IOException {
+        BufferedSource source = Okio.buffer(Okio.source(inputStream));
+        String content =  source.readUtf8();
+        source.close();
+        return content;
+    }
+
+    @NonNull
     public static String readFileAsString(@NonNull File file) throws IOException {
         BufferedSource source = Okio.buffer(Okio.source(file));
         String content =  source.readUtf8();
