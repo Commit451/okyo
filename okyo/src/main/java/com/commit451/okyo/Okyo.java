@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import okio.BufferedSink;
 import okio.BufferedSource;
@@ -16,7 +17,7 @@ import okio.Okio;
  */
 public class Okyo {
 
-    public static void writeInputStreamToFile(@NonNull File file, @NonNull InputStream inputStream) throws IOException {
+    public static void writeInputStreamToFile(@NonNull InputStream inputStream, @NonNull File file) throws IOException {
         BufferedSink sink = Okio.buffer(Okio.sink(file));
         BufferedSource source = Okio.buffer(Okio.source(inputStream));
         sink.writeAll(source);
@@ -25,7 +26,7 @@ public class Okyo {
         source.close();
     }
 
-    public static void writeByteArrayToFile(@NonNull File file, @NonNull byte[] bytes) throws IOException{
+    public static void writeByteArrayToFile(@NonNull byte[] bytes, @NonNull File file) throws IOException{
         BufferedSink sink = Okio.buffer(Okio.sink(file));
         BufferedSource source = Okio.buffer(Okio.source(new ByteArrayInputStream(bytes)));
         sink.writeAll(source);
@@ -34,8 +35,17 @@ public class Okyo {
         source.close();
     }
 
-    public static void writeStringToFile(@NonNull File file, @NonNull String content) throws IOException {
-        writeByteArrayToFile(file, content.getBytes());
+    public static void writeByteArrayToOutputStream(@NonNull byte[] bytes, @NonNull OutputStream outputStream) throws IOException {
+        BufferedSink sink = Okio.buffer(Okio.sink(outputStream));
+        BufferedSource source = Okio.buffer(Okio.source(new ByteArrayInputStream(bytes)));
+        sink.writeAll(source);
+        sink.flush();
+        sink.close();
+        source.close();
+    }
+
+    public static void writeStringToFile(@NonNull String content, @NonNull File file) throws IOException {
+        writeByteArrayToFile(content.getBytes(), file);
     }
 
     public static void writeFileToFile(@NonNull File fileToReadFrom, @NonNull File fileToWriteTo) throws IOException {

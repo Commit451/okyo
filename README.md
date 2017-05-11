@@ -10,11 +10,11 @@
 byte[] bytes = Okyo.readFileAsByteArray(file);
 String content = Okyo.readFileAsString(file);
 //write
-Okyo.writeInputStreamToFile(file, inputStream);
-Okyo.writeByteArrayToFile(file, bytes);
-Okyo.writeByteArrayToFile(file, bytes);
-Okyo.writeStringToFile(file, string);
-Okyo.writeFileToFile(file, otherFile);
+Okyo.writeInputStreamToFile(inputStream, file);
+Okyo.writeByteArrayToFile(bytes, file);
+Okyo.writeByteArrayToFile(bytes, file);
+Okyo.writeStringToFile(string, file);
+Okyo.writeFileToFile(readFile, writeFile);
 ```
 
 License
