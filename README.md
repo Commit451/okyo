@@ -5,16 +5,16 @@
 [![Build Status](https://travis-ci.org/Commit451/okyo.svg?branch=master)](https://travis-ci.org/Commit451/okyo) [![](https://jitpack.io/v/Commit451/okyo.svg)](https://jitpack.io/#Commit451/okyo)
 
 # Usefulness
-```java
+```kotlin
 //read
-byte[] bytes = Okyo.readFileAsByteArray(file);
-String content = Okyo.readFileAsString(file);
+val bytes = Okyo.readFileAsByteArray(file)
+val content = Okyo.readFileAsString(file)
 //write
-Okyo.writeInputStreamToFile(inputStream, file);
-Okyo.writeByteArrayToFile(bytes, file);
-Okyo.writeByteArrayToFile(bytes, file);
-Okyo.writeStringToFile(string, file);
-Okyo.writeFileToFile(readFile, writeFile);
+Okyo.writeInputStreamToFile(inputStream, file)
+Okyo.writeByteArrayToFile(bytes, file)
+Okyo.writeByteArrayToFile(bytes, file)
+Okyo.writeStringToFile(string, file)
+Okyo.writeFileToFile(readFile, writeFile)
 ```
 
 License

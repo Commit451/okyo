@@ -1,1 +1,2 @@
-include ':app', ':okyo'
+rootProject.name = 'okyo'
+
