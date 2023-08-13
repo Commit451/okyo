@@ -1,12 +1,9 @@
 package com.commit451.okyo
 
-import java.io.ByteArrayInputStream
-import java.io.File
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
-
-import okio.Okio
+import okio.buffer
+import okio.sink
+import okio.source
+import java.io.*
 
 @Suppress("NOTHING_TO_INLINE")
 /**
@@ -17,8 +14,8 @@ object Okyo {
     @JvmStatic
     @Throws(IOException::class)
     inline fun writeInputStreamToFile(inputStream: InputStream, file: File) {
-        val sink = Okio.buffer(Okio.sink(file))
-        val source = Okio.buffer(Okio.source(inputStream))
+        val sink = file.sink().buffer()
+        val source = inputStream.source().buffer()
         sink.writeAll(source)
         sink.flush()
         sink.close()
@@ -28,8 +25,8 @@ object Okyo {
     @JvmStatic
     @Throws(IOException::class)
     inline fun writeByteArrayToFile(bytes: ByteArray, file: File) {
-        val sink = Okio.buffer(Okio.sink(file))
-        val source = Okio.buffer(Okio.source(ByteArrayInputStream(bytes)))
+        val sink = file.sink().buffer()
+        val source = ByteArrayInputStream(bytes).source().buffer()
         sink.writeAll(source)
         sink.flush()
         sink.close()
@@ -45,8 +42,8 @@ object Okyo {
     @JvmStatic
     @Throws(IOException::class)
     inline fun writeByteArrayToOutputStream(bytes: ByteArray, outputStream: OutputStream) {
-        val sink = Okio.buffer(Okio.sink(outputStream))
-        val source = Okio.buffer(Okio.source(ByteArrayInputStream(bytes)))
+        val sink = outputStream.sink().buffer()
+        val source = ByteArrayInputStream(bytes).source().buffer()
         sink.writeAll(source)
         sink.flush()
         sink.close()
@@ -62,8 +59,19 @@ object Okyo {
     @JvmStatic
     @Throws(IOException::class)
     inline fun writeFileToFile(fileToReadFrom: File, fileToWriteTo: File) {
-        val sink = Okio.buffer(Okio.sink(fileToWriteTo))
-        val source = Okio.buffer(Okio.source(fileToReadFrom))
+        val sink = fileToWriteTo.sink().buffer()
+        val source = fileToReadFrom.source().buffer()
+        sink.writeAll(source)
+        sink.flush()
+        sink.close()
+        source.close()
+    }
+
+    @JvmStatic
+    @Throws(IOException::class)
+    private fun writeFileToOutputStream(fileToReadFrom: File, outputStream: OutputStream) {
+        val sink = outputStream.sink().buffer()
+        val source = fileToReadFrom.source().buffer()
         sink.writeAll(source)
         sink.flush()
         sink.close()
@@ -73,7 +81,7 @@ object Okyo {
     @JvmStatic
     @Throws(IOException::class)
     inline fun readInputStreamAsString(inputStream: InputStream): String {
-        val source = Okio.buffer(Okio.source(inputStream))
+        val source = inputStream.source().buffer()
         val content = source.readUtf8()
         source.close()
         return content
@@ -82,7 +90,7 @@ object Okyo {
     @JvmStatic
     @Throws(IOException::class)
     inline fun readFileAsString(file: File): String {
-        val source = Okio.buffer(Okio.source(file))
+        val source = file.source().buffer()
         val content = source.readUtf8()
         source.close()
         return content
@@ -91,7 +99,7 @@ object Okyo {
     @JvmStatic
     @Throws(IOException::class)
     inline fun readFileAsByteArray(file: File): ByteArray {
-        val source = Okio.buffer(Okio.source(file))
+        val source = file.source().buffer()
         val bytes = source.readByteArray()
         source.close()
         return bytes

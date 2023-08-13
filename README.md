@@ -2,9 +2,10 @@
 
 [okio](https://github.com/square/okio) made easy, yo
 
-[![Build Status](https://travis-ci.org/Commit451/okyo.svg?branch=master)](https://travis-ci.org/Commit451/okyo) [![](https://jitpack.io/v/Commit451/okyo.svg)](https://jitpack.io/#Commit451/okyo)
+[![](https://jitpack.io/v/Commit451/okyo.svg)](https://jitpack.io/#Commit451/okyo)
 
 # Usefulness
+
 ```kotlin
 //read
 val bytes = Okyo.readFileAsByteArray(file)

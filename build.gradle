@@ -1,16 +1,11 @@
-apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'com.commit451.updatewrapper'
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.8.10'
 
     repositories {
-        jcenter()
-        maven { url "https://jitpack.io" }
+        mavenCentral()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
-        classpath 'com.github.Commit451:updatewrapper:1.1.2'
     }
 }
 
@@ -20,17 +15,18 @@ version '1.0.0'
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
+}
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api("com.squareup.okio:okio:3.5.0")
 
-    api 'com.squareup.okio:okio:1.14.0'
-
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
 }
