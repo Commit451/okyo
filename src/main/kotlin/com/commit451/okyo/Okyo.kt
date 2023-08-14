@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.commit451.okyo
 
 import okio.buffer
@@ -69,7 +71,7 @@ object Okyo {
 
     @JvmStatic
     @Throws(IOException::class)
-    private fun writeFileToOutputStream(fileToReadFrom: File, outputStream: OutputStream) {
+    inline fun writeFileToOutputStream(fileToReadFrom: File, outputStream: OutputStream) {
         val sink = outputStream.sink().buffer()
         val source = fileToReadFrom.source().buffer()
         sink.writeAll(source)
