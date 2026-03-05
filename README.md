@@ -2,7 +2,15 @@
 
 [okio](https://github.com/square/okio) made easy, yo
 
-[![](https://jitpack.io/v/Commit451/okyo.svg)](https://jitpack.io/#Commit451/okyo)
+[![Maven Central](https://img.shields.io/maven-central/v/com.commit451/okyo.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/com.commit451/okyo)
+
+## Gradle
+
+```kotlin
+dependencies {
+    implementation("com.commit451:okyo:VERSION")
+}
+```
 
 # Usefulness
 
