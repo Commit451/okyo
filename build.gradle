@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm' version '2.1.10'
@@ -32,7 +34,7 @@ tasks.withType(Test).configureEach {
 }
 
 mavenPublishing {
-    publishToMavenCentral()
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     if (System.getenv("RELEASE_SIGNING_ENABLED") == "true") {
         signAllPublications()
     }
