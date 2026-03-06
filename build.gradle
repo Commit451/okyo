@@ -1,24 +1,22 @@
-buildscript {
-    ext.kotlin_version = '1.8.22'
+import com.vanniktech.maven.publish.SonatypeHost
 
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm' version '2.1.10'
+    id 'com.vanniktech.maven.publish' version '0.30.0'
 }
 
-group 'com.commit451.okyo'
-version '1.0.0'
-
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
+group = findProperty("GROUP")
+version = findProperty("VERSION_NAME")
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion = JavaLanguageVersion.of(17)
     }
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 repositories {
@@ -26,7 +24,18 @@ repositories {
 }
 
 dependencies {
-    api("com.squareup.okio:okio:3.5.0")
+    api("com.squareup.okio:okio:3.10.2")
 
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation("junit:junit:4.13.2")
+}
+
+tasks.withType(Test).configureEach {
+    useJUnit()
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.S01)
+    if (System.getenv("RELEASE_SIGNING_ENABLED") == "true") {
+        signAllPublications()
+    }
 }
